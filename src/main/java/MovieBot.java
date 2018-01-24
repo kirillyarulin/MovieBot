@@ -16,7 +16,7 @@ public class MovieBot extends TelegramLongPollingBot {
 
     public MovieBot() {
         try {
-            properties.load(new FileInputStream("src/main/resources/application.properties"));
+            properties.load(Application.class.getClassLoader().getResourceAsStream("application.properties"));
             mapResponseMessages = new HashMap<>();
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,7 +30,6 @@ public class MovieBot extends TelegramLongPollingBot {
         long chartId = message.getChatId();
 
         if (textRequest != null) {
-            System.out.println(textRequest);
             textRequest = textRequest.toLowerCase();
             if (mapResponseMessages.containsKey(chartId)) {
                 responseMessage = mapResponseMessages.get(chartId);
